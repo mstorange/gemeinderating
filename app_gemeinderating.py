@@ -254,6 +254,8 @@ gemeinden2d = gpd.read_file('https://raw.githubusercontent.com/mstorange/gemeind
 gemeinden2d = gemeinden2d[gemeinden2d['BFS_NUMMER']!=0].reset_index(drop=True)
 st.write('Welche Spalten hat gemeinden2d?')
 st.write(gemeinden2d.columns)
+st.write('Welche Spalten hat fd?')
+st.write(fd.columns)
 
 # Gemeindegeometrien dazufügen
 storedf_geo = fd.merge(right=gemeinden2d, left_on='Gemeindename',right_on='NAME', how='left')
@@ -541,6 +543,7 @@ st.write('Folgende columns sind ganz am Schluss in df')
 st.write(df.columns)
 
 st_data = st_folium(m, width = 700, height = 500)
+
 
 
 
