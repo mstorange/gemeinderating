@@ -553,7 +553,8 @@ m.get_root().html.add_child(Element(lmlogo))
 m.add_child(folium.map.LayerControl())
 
 
-st_data = st_folium(m, width = 1200, height = 700)
+st_data = st_folium(m, height = 1200, width = 700)
+
 
 
 
