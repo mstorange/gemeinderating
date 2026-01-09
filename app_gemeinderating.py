@@ -315,6 +315,7 @@ for col in relcols:
 storedf_geo = storedf_geo.round(2)
 df = storedf_geo.to_crs(epsg=4326)
 
+st.write('Folgende columns sind jetzt in df')
 st.write(df.columns)
 
 st.write('Hier unmittelbar vor folium.Map')
@@ -328,9 +329,8 @@ satellite = folium.TileLayer(
 
 m = folium.Map(location=[47.572578, 9.093397], zoom_start=10, tiles=satellite, zoom_control=False) # CartoDB dark_matter, positron, voyager
 
-# info = folium.GeoJsonPopup(fields=['NAME', 'Wohnpreisspektrum_norm','Wohnpreisspektrum_vergleich_norm', 'Wohnpreis_entwicklung_norm', 'Bauland_Wohnen', 'Baulandpreis_entwicklung_norm', 'Bev_Prognose','Bev_Alterung','Beschäftigung','Erreichbarkeit_OV', 'Erreichbarkeit_MIV', 'innen', 'Summe', 'col1_html'], aliases=['Gemeinde', 'Wohnpreise aktuell','Wohnpreise vgl. zu Region', 'Wohnpreisentwicklung seit 2023', 'Baulandpreise aktuell', 'Baulandpreisentwicklung seit 2020', 'Bevölkerungsprognose','Alterung', 'Beschäftigung', 'Erreichbarkeit ÖV', 'Erreichbarkeit MIV', 'Innenentwicklungspotenzial', 'Rating', 'Range'])
-hoverinfo = folium.GeoJsonTooltip(fields=['NAME', 'Summe1'], aliases=['Gemeinde', 'Rating'])
-htmlpopup = folium.GeoJsonPopup(fields=['NAME', 'Wohnpreis (aktuell)    ',
+hoverinfo = folium.GeoJsonTooltip(fields=['Gemeindename', 'Summe1'], aliases=['Gemeinde', 'Rating'])
+htmlpopup = folium.GeoJsonPopup(fields=['Gemeindename', 'Wohnpreis (aktuell)    ',
  'Wohnpreis (vgl. Region)',
  'Wohnpreis (Entwicklung)',
  'Baulandpreis (aktuell) ',
@@ -388,7 +388,7 @@ for columnname in relcols:
           #"dashArray": "2, 2",
           },
       # popup=htmlpopup,
-      tooltip=folium.GeoJsonTooltip(fields=['NAME',columnname]), 
+      tooltip=folium.GeoJsonTooltip(fields=['Gemeindename',columnname]), 
       # popup_keep_highlighted=True
       ).add_to(folium.FeatureGroup(name=columnname, show=False).add_to(m))
   
@@ -505,5 +505,6 @@ m.add_child(folium.map.LayerControl())
 
 
 st_data = st_folium(m, width = 700, height = 500)
+
 
 
