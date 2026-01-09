@@ -329,8 +329,8 @@ satellite = folium.TileLayer(
 
 m = folium.Map(location=[47.572578, 9.093397], zoom_start=10, tiles=satellite, zoom_control=False) # CartoDB dark_matter, positron, voyager
 
-hoverinfo = folium.GeoJsonTooltip(fields=['Gemeindename', 'Summe1'], aliases=['Gemeinde', 'Rating'])
-htmlpopup = folium.GeoJsonPopup(fields=['Gemeindename', 'Wohnpreis (aktuell)    ',
+hoverinfo = folium.GeoJsonTooltip(fields=['Gemeinde', 'Summe1'], aliases=['Gemeinde', 'Rating'])
+htmlpopup = folium.GeoJsonPopup(fields=['Gemeinde', 'Wohnpreis (aktuell)    ',
  'Wohnpreis (vgl. Region)',
  'Wohnpreis (Entwicklung)',
  'Baulandpreis (aktuell) ',
@@ -388,7 +388,7 @@ for columnname in relcols:
           #"dashArray": "2, 2",
           },
       # popup=htmlpopup,
-      tooltip=folium.GeoJsonTooltip(fields=['Gemeindename',columnname]), 
+      tooltip=folium.GeoJsonTooltip(fields=['Gemeinde',columnname]), 
       # popup_keep_highlighted=True
       ).add_to(folium.FeatureGroup(name=columnname, show=False).add_to(m))
   
@@ -505,6 +505,7 @@ m.add_child(folium.map.LayerControl())
 
 
 st_data = st_folium(m, width = 700, height = 500)
+
 
 
 
