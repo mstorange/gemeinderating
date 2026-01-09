@@ -34,13 +34,18 @@ with st.form("filter_form"):
 
     submitted = st.form_submit_button("Anwenden")
 
-if not submitted:
-    st.info("Bitte Auswahl treffen und auf *Anwenden* klicken.")
+if submitted:
+    st.session_state.applied = True
+    st.session_state.selected_cantons = selected_cantons
+
+if not st.session_state.applied:
+    st.info("Bitte Auswahl treffen und auf Anwenden klicken.")
     st.stop()
 
 st.write("Folgende Kantone werden analysiert:", selected_cantons)
 
-fd = data[data['Kanton'].isin(selected_cantons)].reset_index(drop=True)
+fd = data[data["Kanton"].isin(st.session_state.selected_cantons)].reset_index(drop=True)
+#fd = data[data['Kanton'].isin(selected_cantons)].reset_index(drop=True)
 
 # Wohnpreise
 wertmin, wertmax = fd['Wohnpreis (aktuell)    '].min(), fd['Wohnpreis (aktuell)    '].max()
@@ -548,7 +553,8 @@ m.get_root().html.add_child(Element(lmlogo))
 m.add_child(folium.map.LayerControl())
 
 
-st_data = st_folium(m, width = 700, height = 500)
+st_data = st_folium(m, width = 1200, height = 700)
+
 
 
 
