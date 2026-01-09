@@ -216,7 +216,7 @@ kriterien = ['Wohnpreis (aktuell)    ',
        'Bevölkerung (Prognose) ', 'Alterung (Prognose)    ',
        'Beschäftigte (Prognose)', 'Erreichbarkeit ÖV      ',
        'Erreichbarkeit MIV     ',
-       'Innenentw.-Potenzial   ', 'Steuern_DINKs          ']
+       'Innenentwicklungspotenzial', 'Steuern_DINKs          ']
 # Gewichte festlegen
 g = [1.5, 1, 1.25, 1.5, 1, 1.25, 1, 1, 1.25, 1.25, 1, 1]
 
@@ -346,7 +346,7 @@ htmlpopup = folium.GeoJsonPopup(fields=['Gemeinde', 'Wohnpreis (aktuell)    ',
  'Beschäftigte (Prognose)',
  'Erreichbarkeit ÖV      ',
  'Erreichbarkeit MIV     ','Steuern_DINKs          ',
- 'Innenentw.-Potenzial   ', 'Summe'], aliases=['Gemeinde', 'Wohnpreis', 'Wohnpreis (vgl. Region)','Wohnpreis (Entwicklung)', 'Baulandpreis', 'Baulandpreis (Entwicklung)', 'Bevölkerung (Prognose)','Alterung (Prognose)', 'Beschäftigung (Prognose)', 'Erreichbarkeit ÖV', 'Erreichbarkeit MIV','Steuern_DINKs', 'Innenentwicklung', 'Rating (Summe)'], labels=False, style="font-size:12px;", max_width=1200)
+ 'Innenentwicklungspotenzial', 'Summe'], aliases=['Gemeinde', 'Wohnpreis', 'Wohnpreis (vgl. Region)','Wohnpreis (Entwicklung)', 'Baulandpreis', 'Baulandpreis (Entwicklung)', 'Bevölkerung (Prognose)','Alterung (Prognose)', 'Beschäftigung (Prognose)', 'Erreichbarkeit ÖV', 'Erreichbarkeit MIV','Steuern_DINKs', 'Innenentwicklung', 'Rating (Summe)'], labels=False, style="font-size:12px;", max_width=1200)
 
 
 # alles zusammen plotten
@@ -513,6 +513,7 @@ st.write('Folgende columns sind ganz am Schluss in df')
 st.write(df.columns)
 
 st_data = st_folium(m, width = 700, height = 500)
+
 
 
 
