@@ -227,7 +227,7 @@ fd = fd.round(2)
 
 # Gemeinden georeferenzieren
 gemeinden2d = gpd.read_file('https://raw.githubusercontent.com/mstorange/gemeinderating/main/Gemeinden2D.gpkg')
-st.write(gemeinden2d.columns)
+
 
 
 
@@ -315,6 +315,7 @@ for col in relcols:
 storedf_geo = storedf_geo.round(2)
 df = storedf_geo.to_crs(epsg=4326)
 
+st.write(df.columns)
 
 st.write('Hier unmittelbar vor folium.Map')
 
@@ -504,4 +505,5 @@ m.add_child(folium.map.LayerControl())
 
 
 st_data = st_folium(m, width = 700, height = 500)
+
 
