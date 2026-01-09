@@ -1,0 +1,7 @@
+# requirements.txt: hier sind alle dependencies, die wir brauchen
+pandas
+streamlit
+streamlit-folium
+geopandas
+matplotlib
+numpy
