@@ -329,6 +329,12 @@ satellite = folium.TileLayer(
 
 m = folium.Map(location=[47.572578, 9.093397], zoom_start=10, tiles=satellite, zoom_control=False) # CartoDB dark_matter, positron, voyager
 
+st.write("chatgpt TYPE:", type(df))
+st.write("COLUMNS:", list(df.columns))
+st.write("ROWS:", len(df))
+st.write(df.head())
+
+
 hoverinfo = folium.GeoJsonTooltip(fields=['Gemeinde', 'Summe1'], aliases=['Gemeinde', 'Rating'])
 htmlpopup = folium.GeoJsonPopup(fields=['Gemeinde', 'Wohnpreis (aktuell)    ',
  'Wohnpreis (vgl. Region)',
@@ -507,6 +513,7 @@ st.write('Folgende columns sind ganz am Schluss in df')
 st.write(df.columns)
 
 st_data = st_folium(m, width = 700, height = 500)
+
 
 
 
