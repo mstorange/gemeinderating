@@ -315,6 +315,9 @@ for col in relcols:
 storedf_geo = storedf_geo.round(2)
 df = storedf_geo.to_crs(epsg=4326)
 
+
+st.write('Hier unmittelbar vor folium.Map')
+
 satellite = folium.TileLayer(
         tiles = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
         attr = 'Esri',
@@ -501,3 +504,4 @@ m.add_child(folium.map.LayerControl())
 
 
 st_data = st_folium(m, width = 700, height = 500)
+
