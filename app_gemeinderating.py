@@ -262,7 +262,7 @@ storedf_geo = fd.merge(right=gemeinden2d, left_on='Gemeindename',right_on='NAME'
 storedf_geo = gpd.GeoDataFrame(storedf_geo, crs='EPSG:2056', geometry='geometry')
 
 # critical for streamlit
-storedf_geo = storedf_geo[storedf_geo.geometry.notna()].copy()
+# storedf_geo = storedf_geo[storedf_geo.geometry.notna()].copy()
 
 st.write('Check if no rows...')
 if storedf_geo.empty:
@@ -543,6 +543,7 @@ st.write('Folgende columns sind ganz am Schluss in df')
 st.write(df.columns)
 
 st_data = st_folium(m, width = 700, height = 500)
+
 
 
 
