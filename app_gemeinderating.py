@@ -32,11 +32,6 @@ with st.form("filter_form"):
         valid_kantone
     )
 
-    min_rating = st.slider(
-        "Mindest-Rating",
-        0, 100, 50
-    )
-
     submitted = st.form_submit_button("Anwenden")
 
 if not submitted:
@@ -554,6 +549,7 @@ m.add_child(folium.map.LayerControl())
 
 
 st_data = st_folium(m, width = 700, height = 500)
+
 
 
 
