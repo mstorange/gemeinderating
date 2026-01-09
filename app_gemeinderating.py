@@ -503,8 +503,11 @@ m.get_root().html.add_child(Element(lmlogo))
 
 m.add_child(folium.map.LayerControl())
 
+st.write('Folgende columns sind ganz am Schluss in df')
+st.write(df.columns)
 
 st_data = st_folium(m, width = 700, height = 500)
+
 
 
 
