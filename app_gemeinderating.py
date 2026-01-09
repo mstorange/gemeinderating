@@ -225,6 +225,25 @@ fd['Summe1'] = g[0]*fd['Wohnpreis (aktuell)    ']+g[1]*fd['Wohnpreis (vgl. Regio
 fd = fd.round(2)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Gemeinden georeferenzieren
 gemeinden2d = gpd.read_file('https://raw.githubusercontent.com/mstorange/gemeinderating/main/Gemeinden2D.gpkg')
 
@@ -233,6 +252,8 @@ gemeinden2d = gpd.read_file('https://raw.githubusercontent.com/mstorange/gemeind
 
 # warum auch immer sind hier auch deutsche, italienische, etc. Polygone drin haha, diese nehmen wir raus, sie haben die BFS-NR 0
 gemeinden2d = gemeinden2d[gemeinden2d['BFS_NUMMER']!=0].reset_index(drop=True)
+st.write('Welche Spalten hat gemeinden2d?')
+st.write(gemeinden2d.columns)
 
 # Gemeindegeometrien dazufügen
 storedf_geo = fd.merge(right=gemeinden2d, left_on='Gemeindename',right_on='NAME', how='left')
@@ -520,6 +541,7 @@ st.write('Folgende columns sind ganz am Schluss in df')
 st.write(df.columns)
 
 st_data = st_folium(m, width = 700, height = 500)
+
 
 
 
