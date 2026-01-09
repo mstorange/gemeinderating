@@ -550,10 +550,12 @@ lmlogo = '''
 '''
 m.get_root().html.add_child(Element(lmlogo))
 
-m.add_child(folium.map.LayerControl())
+#m.add_child(folium.map.LayerControl())
+folium.LayerControl(collapsed=False).add_to(m)
 
 
-st_data = st_folium(m, height = 1200, width = 700)
+st_data = st_folium(m, height = 500, width = 700, returned_objects=[])
+
 
 
 
