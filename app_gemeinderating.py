@@ -26,11 +26,22 @@ allekantone = data['Kanton'].value_counts()
 valid_kantone = allekantone[allekantone > 10].index.tolist()
 valid_kantone
 
-selected_cantons = st.multiselect(
-    "Welche Kantone möchtest du analysieren?",
-    valid_kantone,
-    accept_new_options=False,
-)
+with st.form("filter_form"):
+    selected_cantons = st.multiselect(
+        "Kantone auswählen",
+        valid_kantone
+    )
+
+    min_rating = st.slider(
+        "Mindest-Rating",
+        0, 100, 50
+    )
+
+    submitted = st.form_submit_button("Anwenden")
+
+if not submitted:
+    st.info("Bitte Auswahl treffen und auf *Anwenden* klicken.")
+    st.stop()
 
 st.write("Folgende Kantone werden analysiert:", selected_cantons)
 
@@ -252,24 +263,24 @@ gemeinden2d = gpd.read_file('https://raw.githubusercontent.com/mstorange/gemeind
 
 # warum auch immer sind hier auch deutsche, italienische, etc. Polygone drin haha, diese nehmen wir raus, sie haben die BFS-NR 0
 gemeinden2d = gemeinden2d[gemeinden2d['BFS_NUMMER']!=0].reset_index(drop=True)
-st.write('Welche Spalten hat gemeinden2d?')
-st.write(gemeinden2d.columns)
-st.write('Welche Spalten hat fd?')
-st.write(fd.columns)
+##st.write('Welche Spalten hat gemeinden2d?')
+#st.write(gemeinden2d.columns)
+#st.write('Welche Spalten hat fd?')
+#st.write(fd.columns)
 
 # Gemeindegeometrien dazufügen
 storedf_geo = fd.merge(right=gemeinden2d, left_on='Gemeindename',right_on='NAME', how='left')
-st.write('Länge des merges:', len(storedf_geo))
-st.write('Hier gemeinden2d.empty testen:', gemeinden2d.empty)
+#st.write('Länge des merges:', len(storedf_geo))
+#st.write('Hier gemeinden2d.empty testen:', gemeinden2d.empty)
 storedf_geo = gpd.GeoDataFrame(storedf_geo, crs='EPSG:2056', geometry='geometry')
 
 # critical for streamlit
 # storedf_geo = storedf_geo[storedf_geo.geometry.notna()].copy()
 
-st.write('Check if no rows...')
-if storedf_geo.empty:
-    st.error("Keine gültigen Geometrien nach dem Merge gefunden.")
-    st.stop()
+#st.write('Check if no rows...')
+#if storedf_geo.empty:
+    #st.error("Keine gültigen Geometrien nach dem Merge gefunden.")
+    #st.stop()
 
 
 norm = plt.Normalize(storedf_geo['Summe1'].min(), storedf_geo['Summe1'].max())
@@ -351,10 +362,10 @@ df = storedf_geo.to_crs(epsg=4326)
 
 
 
-st.write('Folgende columns sind jetzt in df')
-st.write(df.columns)
+#st.write('Folgende columns sind jetzt in df')
+#st.write(df.columns)
 
-st.write('Hier unmittelbar vor folium.Map')
+#st.write('Hier unmittelbar vor folium.Map')
 
 satellite = folium.TileLayer(
         tiles = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
@@ -541,10 +552,9 @@ m.get_root().html.add_child(Element(lmlogo))
 
 m.add_child(folium.map.LayerControl())
 
-st.write('Folgende columns sind ganz am Schluss in df')
-st.write(df.columns)
 
 st_data = st_folium(m, width = 700, height = 500)
+
 
 
 
