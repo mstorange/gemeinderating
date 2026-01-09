@@ -238,6 +238,10 @@ gemeinden2d = gemeinden2d[gemeinden2d['BFS_NUMMER']!=0].reset_index(drop=True)
 storedf_geo = fd.merge(right=gemeinden2d, left_on='Gemeindename',right_on='NAME', how='left')
 storedf_geo = gpd.GeoDataFrame(storedf_geo, crs='EPSG:2056', geometry='geometry')
 
+# critical for streamlit
+storedf_geo = storedf_geo[storedf_geo.geometry.notna()].copy()
+
+
 norm = plt.Normalize(storedf_geo['Summe1'].min(), storedf_geo['Summe1'].max())
 cmap = plt.get_cmap('RdYlGn')
 def rgba_to_hex(rgba):
@@ -314,6 +318,11 @@ for col in relcols:
 
 storedf_geo = storedf_geo.round(2)
 df = storedf_geo.to_crs(epsg=4326)
+
+st.write('Check if no rows...")
+if df.empty:
+    st.error("Keine gültigen Geometrien nach dem Merge gefunden.")
+    st.stop()
 
 st.write('Folgende columns sind jetzt in df')
 st.write(df.columns)
@@ -509,6 +518,7 @@ st.write('Folgende columns sind ganz am Schluss in df')
 st.write(df.columns)
 
 st_data = st_folium(m, width = 700, height = 500)
+
 
 
 
