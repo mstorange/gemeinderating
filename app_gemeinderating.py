@@ -554,7 +554,8 @@ m.add_child(folium.map.LayerControl())
 #folium.LayerControl(collapsed=False).add_to(m)
 
 
-st_data = st_folium(m, height = 500, width = 1200, returned_objects=[])
+st_data = st_folium(m, height = 1000, width = 1700, returned_objects=[])
+
 
 
 
