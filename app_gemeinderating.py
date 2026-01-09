@@ -319,7 +319,7 @@ for col in relcols:
 storedf_geo = storedf_geo.round(2)
 df = storedf_geo.to_crs(epsg=4326)
 
-st.write('Check if no rows...")
+st.write('Check if no rows...')
 if df.empty:
     st.error("Keine gültigen Geometrien nach dem Merge gefunden.")
     st.stop()
@@ -518,6 +518,7 @@ st.write('Folgende columns sind ganz am Schluss in df')
 st.write(df.columns)
 
 st_data = st_folium(m, width = 700, height = 500)
+
 
 
 
