@@ -259,6 +259,8 @@ st.write(fd.columns)
 
 # Gemeindegeometrien dazufügen
 storedf_geo = fd.merge(right=gemeinden2d, left_on='Gemeindename',right_on='NAME', how='left')
+st.write('Länge des merges:', len(storedf_geo))
+st.write('Hier gemeinden2d.empty testen:', gemeinden2d.empty)
 storedf_geo = gpd.GeoDataFrame(storedf_geo, crs='EPSG:2056', geometry='geometry')
 
 # critical for streamlit
@@ -543,6 +545,7 @@ st.write('Folgende columns sind ganz am Schluss in df')
 st.write(df.columns)
 
 st_data = st_folium(m, width = 700, height = 500)
+
 
 
 
